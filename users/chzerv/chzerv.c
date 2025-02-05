@@ -1,6 +1,5 @@
 #include "features/sentence_case.h"
 #include "features/swapper.h"
-#include "features/oneshot.h"
 #include "chzerv.h"
 
 // Holding the `_NAV` and `_SYM` keys simultaneously activates the `_FUN` layer.
@@ -8,59 +7,47 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     return update_tri_layer_state(state, _SYM, _NAV, _FUN);
 }
 
+// Increase the TAPPING_TERM for pinky keys.
+// uint16_t get_tapping_term(uint16_t keycode, keyrecord_t* record) {
+//   switch (keycode) {
+//     case HOME_A:
+//     case HOME_O:
+//     case HOME_I:
+//       return TAPPING_TERM + 50;
+//     default:
+//       return TAPPING_TERM;
+//   }
+// }
+
 // When a dual function thumb key + another key is pressed, use the hold action.
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case TAB_NAV:
         case MO(_SYM):
         case ENT_NUM:
+        case LT_REP:
             return true;
         default:
             return false;
     }
 }
 
-// Custom One Shot Modifiers
-oneshot_mod_state osm_shift_state = osm_up_unqueued;
-oneshot_mod_state osm_ctrl_state = osm_up_unqueued;
-oneshot_mod_state osm_alt_state = osm_up_unqueued;
-oneshot_mod_state osm_gui_state = osm_up_unqueued;
-oneshot_layer_state osl_mod_state = osl_up_unqueued;
-
-bool is_oneshot_cancel_key(uint16_t keycode) {
-    switch (keycode) {
-        case MO(_SYM):
-        case KC_ESC:
-            return true;
-        default:
-            return false;
-    }
+bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
+    return true;
 }
 
-bool is_oneshot_ignored_key(uint16_t keycode) {
-    switch (keycode) {
-        case TAB_NAV:
-        case OSM_S:
-        case OSM_C:
-        case OSM_A:
-        case OSM_G:
+bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
+        uint16_t other_keycode, keyrecord_t* other_record) {
+    // Allow one handed chords when Layer Taps are involved.
+    switch (tap_hold_keycode) {
+        case QK_LAYER_TAP ... QK_LAYER_TAP_MAX:
             return true;
-        default:
-            return false;
     }
+
+    // Otherwise defer to the opposite hands rule.
+    return get_chordal_hold_default(tap_hold_record, other_record);
 }
 
-bool is_oneshot_mod_key(uint16_t keycode) {
-    switch (keycode) {
-        case OSM_S:
-        case OSM_C:
-        case OSM_A:
-        case OSM_G:
-            return true;
-        default:
-            return false;
-    }
-}
 /**
  * Caps word (https://docs.qmk.fm/features/caps_word)
  **/
@@ -84,40 +71,40 @@ bool caps_word_press_user(uint16_t keycode) {
     }
 }
 
-/**
- * Leader Key (https://docs.qmk.fm/features/leader_key)
+/*
+ * Repeat (https://docs.qmk.fm/features/repeat_key)
  **/
-void leader_end_user(void) {
-    if (leader_sequence_one_key(KC_V)) { // Vim vertical split
-        tap_code16(C(KC_W));
-        tap_code(KC_V);
-    } else if (leader_sequence_one_key(KC_S)) { // Vim horizontal split
-        tap_code16(C(KC_W));
-        tap_code(KC_S);
-    } else if (leader_sequence_one_key(KC_Q)) { // Quit Vim
-        tap_code(KC_ESC);
-        tap_code16(KC_COLN);
-        tap_code(KC_Q);
-        tap_code(KC_ENT);
-    } else if (leader_sequence_two_keys(KC_Q, KC_Q)) { // Force quit Vim
-        tap_code(KC_ESC);
-        tap_code16(KC_COLN);
-        tap_code(KC_Q);
-        tap_code16(KC_EXLM);
-        tap_code(KC_ENT);
-    } else if (leader_sequence_one_key(KC_W)) { // Save buffer in Vim
-        tap_code(KC_ESC);
-        tap_code16(KC_COLN);
-        tap_code(KC_W);
-        tap_code(KC_ENT);
-    } else if (leader_sequence_one_key(KC_X)) { // Save buffer and exit Vim
-        tap_code(KC_ESC);
-        tap_code16(KC_COLN);
-        tap_code(KC_X);
-        tap_code(KC_ENT);
-    } else if (leader_sequence_one_key(KC_C)) { // Toggle Caps Lock
-        tap_code(KC_CAPS);
+bool remember_last_key_user(uint16_t keycode, keyrecord_t* record,
+        uint8_t* remembered_mods) {
+    if (keycode == LT_REP) { return false; }
+    return true;
+}
+
+uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
+    if ((mods & MOD_MASK_CTRL)) {
+        switch (keycode) {
+            case HOME_A: return C(KC_C);  // Ctrl+A -> Ctrl+C
+            case KC_C: return C(KC_V);    // Ctrl+C -> Ctrl+V
+        }
+    } else if ((mods & ~MOD_MASK_SHIFT) == 0) {
+        switch (keycode) {
+            case HOME_N:
+                if ((mods & MOD_MASK_SHIFT) == 0) {
+                    return S(KC_N);
+                }
+            case KC_N: return KC_N;
+            case TAB_NX: return TAB_PR;
+            case TAB_PR: return TAB_NX;
+            case HOME_I:
+                if ((mods & MOD_MASK_SHIFT) == 0) {
+                    return M_ION;
+                } else {
+                    return KC_QUOT;
+                }
+        }
     }
+
+    return KC_TRNS;
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -128,63 +115,6 @@ bool sw_lang_active = false;
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 
-    update_oneshot_mod(
-            &osl_mod_state,
-            &osm_shift_state,
-            KC_LSFT,
-            OSM_S,
-            keycode,
-            record
-            );
-
-    update_oneshot_mod(
-            &osl_mod_state,
-            &osm_ctrl_state,
-            KC_LCTL,
-            OSM_C,
-            keycode,
-            record
-            );
-
-    update_oneshot_mod(
-            &osl_mod_state,
-            &osm_alt_state,
-            KC_LALT,
-            OSM_A,
-            keycode,
-            record
-            );
-
-    update_oneshot_mod(
-            &osl_mod_state,
-            &osm_gui_state,
-            KC_LGUI,
-            OSM_G,
-            keycode,
-            record
-            );
-
-    update_oneshot_mod(
-            &osl_mod_state,
-            &osm_gui_state,
-            KC_LSFT | KC_LCTL,
-            OSM_G,
-            keycode,
-            record
-            );
-
-
-    update_oneshot_layer(
-            &osl_mod_state,
-            &osm_shift_state,
-            &osm_ctrl_state,
-            &osm_alt_state,
-            &osm_gui_state,
-            TAB_NAV,
-            _NAV,
-            keycode,
-            record
-            );
     // Switch windows.
     update_swapper(
             &sw_win_active, KC_LGUI, KC_TAB, SW_WIN,
@@ -198,6 +128,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
             );
 
     if (!process_sentence_case(keycode, record)) { return false; }
+
+    // Dual function repeat key.
+    switch (keycode) {
+        case LT_REP:
+            if (record->tap.count) {
+                repeat_key_invoke(&record->event);
+                return false;
+            }
+            break;
+    }
 
     if (record->event.pressed) {
         switch (keycode) {
@@ -223,6 +163,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 
             case SRCHSEL:
                 SEND_STRING(SS_LCTL("ct") SS_DELAY(100) SS_LCTL("v") SS_TAP(X_ENTER));
+                return false;
+
+            case M_ION:
+                SEND_STRING(/*i*/"on");
                 return false;
         }
     }

@@ -9,4 +9,3 @@ const key_override_t *key_overrides[] = {
 	&coln_override,
     &delete_override
 };
-

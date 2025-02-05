@@ -5,16 +5,12 @@ This is a valid [QMK userspace](https://docs.qmk.fm/newbs_external_userspace) re
 ## Features
 
 -   Favors comfort over speed
+-   Home Row Modifiers enhanced via [Chordal Hold](https://github.com/qmk/qmk_firmware/pull/24560/)
 -   Utilizes [combos](https://docs.qmk.fm/features/combo) to output hard to reach keys, e.g., `:`, `'`, `Ctrl-Z`, `Alt-Tab`, `Escape` and more.
--   Utilizes a [leader key](https://docs.qmk.fm/features/leader_key) to output complex key combinations. For example:
-    -   `<leader>q` to quit Vim
-    -   `<leader>c` to toggle Caps Lock
-    -   and more..
 -   Utilizes [key overrides](https://docs.qmk.fm/features/key_overrides) to change what actions shifted keys perform. For example:
     -   `Shift + :` outputs `;`.
     -   `Shift + Bspc` outputs `Delete`.
 -   Utilizes [Caps Word](https://docs.qmk.fm/features/caps_word), [Sentence Case](https://getreuer.info/posts/keyboards/sentence-case/index.html) and a Shift key on the thumb cluster to reduce finger stretches when capitalizing words/letters.
--   Callum-style modifiers, using a slightly modified version of [Exidex' implementation](https://www.reddit.com/r/ErgoMechKeyboards/comments/1ghemwu/timeless_home_row_mods_focused_on_convenient/).
 -   Symbol layer that favors Vim navigation, inspired by [sunaku's awesome symbol layer](https://sunaku.github.io/moergo-glove80-keyboard.html#symbol-layer).
 -   Navigation layer inspired by the awesome [Extend layer](https://dreymar.colemak.org/layers-extend.html), which contains stuff like:
     -   Home/End,
@@ -35,14 +31,11 @@ This is a valid [QMK userspace](https://docs.qmk.fm/newbs_external_userspace) re
     qmk setup
     ```
 
-2. Merge the [Chordal Hold branch](https://github.com/qmk/qmk_firmware/pull/24560):
+2. Switch to the `develop` branch so [Chordal Hold](https://github.com/qmk/qmk_firmware/pull/24560) is available:
 
     ```bash
     cd qmk_firmware
-
-    git remote add getreuer https://github.com/getreuer/qmk_firmware
-    git fetch getreuer core/chordal_hold
-    git merge getreuer/core/chordal_hold --no-edit
+    git chechout develop && git pull
     ```
 
 3. Clone this repository and set it as an overlay:

@@ -12,13 +12,12 @@ LTO_ENABLE = yes
 CAPS_WORD_ENABLE = yes
 COMBO_ENABLE = yes
 NKRO_ENABLE = yes
-LEADER_ENABLE = yes
 LAYER_LOCK_ENABLE = yes
 KEY_OVERRIDE_ENABLE = yes
+REPEAT_KEY_ENABLE = yes
 
 SRC += $(USER_PATH)/features/sentence_case.c
 SRC += $(USER_PATH)/features/swapper.c
-SRC += $(USER_PATH)/features/oneshot.c
 SRC += $(USER_PATH)/chzerv.c
 
 INTROSPECTION_KEYMAP_C = $(USER_PATH)/combos.c

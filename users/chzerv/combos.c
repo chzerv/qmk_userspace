@@ -8,12 +8,12 @@ enum combos {
 };
 
 
-const uint16_t PROGMEM esc_combo[] = {KC_N, KC_E, COMBO_END};
+const uint16_t PROGMEM esc_combo[] = {HOME_N, KC_E, COMBO_END};
 const uint16_t PROGMEM cw_combo[] = {KC_H, KC_COMM, COMBO_END};
-const uint16_t PROGMEM alt_tab_combo[] = {KC_S, KC_T, COMBO_END};
-const uint16_t PROGMEM quot_combo[] = {KC_E, KC_I, COMBO_END};
+const uint16_t PROGMEM alt_tab_combo[] = {KC_S, HOME_T, COMBO_END};
+const uint16_t PROGMEM quot_combo[] = {KC_E, HOME_I, COMBO_END};
 const uint16_t PROGMEM coln_combo[] = {KC_U, KC_Y, COMBO_END};
-const uint16_t PROGMEM fg_combo[] = {KC_T, KC_G, COMBO_END};
+const uint16_t PROGMEM fg_combo[] = {HOME_T, KC_G, COMBO_END};
 
 combo_t key_combos[] = {
     [ESC_COMBO] = COMBO(esc_combo, KC_ESC),
@@ -47,7 +47,7 @@ bool process_combo_key_repress(uint16_t combo_index, combo_t *combo, uint8_t key
                 case KC_S:
                     tap_code16(S(KC_TAB));
                     return true;
-                case KC_T:
+                case HOME_T:
                     tap_code(KC_TAB);
                     return true;
             }

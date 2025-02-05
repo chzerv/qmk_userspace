@@ -1,9 +1,13 @@
 #pragma once
 
-// Tap-hold settings
-#define TAPPING_TERM 200
-#define PERMISSIVE_HOLD
+// Home row mods
+#define TAPPING_TERM 190
+#define TAPPING_TERM_PER_KEY
+#define PERMISSIVE_HOLD_PER_KEY
 #define HOLD_ON_OTHER_KEY_PRESS_PER_KEY
+#define QUICK_TAP_TERM 0
+
+#define CHORDAL_HOLD
 
 // Leader Key
 #ifdef LEADER_ENABLE

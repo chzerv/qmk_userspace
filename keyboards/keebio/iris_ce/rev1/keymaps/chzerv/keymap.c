@@ -1,6 +1,3 @@
-// Copyright 2023 Danny Nguyen (@nooges)
-// SPDX-License-Identifier: GPL-2.0-or-later
-
 #include QMK_KEYBOARD_H
 
 #include "chzerv.h"
@@ -18,7 +15,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_HOME,          SW_LANG, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    OSM_LS,  TAB_NAV, KC_SPC,                    ENT_NUM, MO(_SYM),QK_LEAD
+                                    OSM_LS,  TAB_NAV, KC_SPC,                    ENT_NUM, LT_REP,  QK_AREP
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
@@ -28,14 +25,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                               KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSLS,
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_BSPC, KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                               KC_M,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
+     KC_BSPC, HOME_A,  HOME_R,  KC_S,    HOME_T,  KC_G,                               KC_M,    HOME_N,  KC_E,    HOME_I,  HOME_O,  KC_QUOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    KC_HOME,          SW_LANG, KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    OSM_LS,  TAB_NAV, KC_SPC,                    ENT_NUM, MO(_SYM),QK_LEAD
+                                    OSM_LS,  TAB_NAV, KC_SPC,                    ENT_NUM, LT_REP,  QK_AREP
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
-
 
   [_NAV] = LAYOUT(
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                          ┌────────┬────────┬────────┬────────┬────────┬────────┐
@@ -47,7 +43,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      REDO,    KC_UNDO, KC_CUT,  KC_COPY, KC_PSTE, XXXXXXX, _______,          QK_LLCK, MS_WHLL, MS_WHLD, MS_WHLU, MS_WHLR, KC_APP, _______,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    _______, _______, _______,                   C(KC_SPC), _______, _______
+                                    _______, _______, _______,                 C(KC_SPC), _______, _______
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
@@ -93,3 +89,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   )
 };
+
+#ifdef CHORDAL_HOLD
+// Handedness for Chordal Hold.
+const char chordal_hold_layout[MATRIX_ROWS][MATRIX_COLS] PROGMEM =
+  LAYOUT(
+     '*', '*', '*', '*', '*', '*',                            '*', '*', '*', '*', '*', '*',
+     '*', 'L', 'L', 'L', 'L', 'L',                            'R', 'R', 'R', 'R', 'R', 'R',
+     '*', 'L', 'L', 'L', 'L', 'L',                            'R', 'R', 'R', 'R', 'R', 'R',
+     '*', 'L', 'L', 'L', 'L', 'L', '*',                  '*', 'R', 'R', 'R', 'R', 'R', 'R',
+                        '*', '*', '*',                    '*', '*', '*'
+);
+#endif  // CHORDAL_HOLD
