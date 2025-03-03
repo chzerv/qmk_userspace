@@ -22,6 +22,7 @@ enum custom_keycodes {
     SW_LANG,
     QWERTY,
     COLEMAK,
+    GAMING,
     M_ION,
 };
 
@@ -60,4 +61,3 @@ enum custom_keycodes {
 #define HOME_E RSFT_T(KC_E)
 #define HOME_I LALT_T(KC_I)
 #define HOME_O RGUI_T(KC_O)
-
