@@ -23,7 +23,6 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case TAB_NAV:
-        case MO(_SYM):
         case ENT_NUM:
         case LT_REP:
             return true;
@@ -33,20 +32,27 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
 }
 
 bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
-    return true;
-}
-
-bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
-        uint16_t other_keycode, keyrecord_t* other_record) {
-    // Allow one handed chords when Layer Taps are involved.
-    switch (tap_hold_keycode) {
-        case QK_LAYER_TAP ... QK_LAYER_TAP_MAX:
+    switch (keycode) {
+        case TAB_NAV:
+        case ENT_NUM:
+        case LT_REP:
+            return false;
+        default:
             return true;
     }
-
-    // Otherwise defer to the opposite hands rule.
-    return get_chordal_hold_default(tap_hold_record, other_record);
 }
+
+// bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
+//         uint16_t other_keycode, keyrecord_t* other_record) {
+//     // Allow one handed chords when Layer Taps are involved.
+//     switch (tap_hold_keycode) {
+//         case QK_LAYER_TAP ... QK_LAYER_TAP_MAX:
+//             return true;
+//     }
+//
+//     // Otherwise defer to the opposite hands rule.
+//     return get_chordal_hold_default(tap_hold_record, other_record);
+// }
 
 /**
  * Caps word (https://docs.qmk.fm/features/caps_word)
