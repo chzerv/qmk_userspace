@@ -24,6 +24,7 @@ enum custom_keycodes {
     COLEMAK,
     GAMING,
     M_ION,
+    M_OU,
 };
 
 

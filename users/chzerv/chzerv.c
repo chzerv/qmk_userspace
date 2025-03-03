@@ -99,6 +99,7 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
                     return S(KC_N);
                 }
             case KC_N: return KC_N;
+            case KC_Y: return M_OU;
             case TAB_NX: return TAB_PR;
             case TAB_PR: return TAB_NX;
             case HOME_I:
@@ -177,6 +178,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 
             case M_ION:
                 SEND_STRING(/*i*/"on");
+                return false;
+
+            case M_OU:
+                SEND_STRING(/*y*/"ou");
                 return false;
         }
     }
