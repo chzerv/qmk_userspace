@@ -9,6 +9,7 @@ enum custom_layers {
     _SYM,
     _NUM,
     _FUN,
+    _GAMING,
 };
 /**
  * Custom keys
