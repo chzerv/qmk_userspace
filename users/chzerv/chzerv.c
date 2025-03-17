@@ -41,6 +41,16 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
+// Disable key repeating unless its for Vim navigation.
+uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t* record) {
+    switch (keycode) {
+        case HOME_N:
+            return QUICK_TAP_TERM;
+        default:
+            return 0;
+    }
+}
+
 // bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
 //         uint16_t other_keycode, keyrecord_t* other_record) {
 //     // Allow one handed chords when Layer Taps are involved.
