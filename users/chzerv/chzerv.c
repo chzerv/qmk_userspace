@@ -1,4 +1,3 @@
-#include "features/sentence_case.h"
 #include "features/swapper.h"
 #include "chzerv.h"
 
@@ -133,8 +132,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
             &sw_lang_active, KC_LGUI, KC_SPC, SW_LANG,
             keycode, record
             );
-
-    if (!process_sentence_case(keycode, record)) { return false; }
 
     // Dual function repeat key.
     switch (keycode) {

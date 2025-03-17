@@ -16,7 +16,6 @@ LAYER_LOCK_ENABLE = yes
 KEY_OVERRIDE_ENABLE = yes
 REPEAT_KEY_ENABLE = yes
 
-SRC += $(USER_PATH)/features/sentence_case.c
 SRC += $(USER_PATH)/features/swapper.c
 SRC += $(USER_PATH)/chzerv.c
 
