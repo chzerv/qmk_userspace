@@ -95,6 +95,8 @@ bool remember_last_key_user(uint16_t keycode, keyrecord_t* record,
     return true;
 }
 
+// "Magic key", inspired by https://github.com/getreuer/qmk-keymap
+// Also see: https://getreuer.info/posts/keyboards/alt-layouts/index.html#magic-sturdy
 uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
     if ((mods & MOD_MASK_CTRL)) {
         switch (keycode) {
@@ -109,6 +111,9 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
                 }
             case KC_N: return KC_N;
             case KC_Y: return M_OU;
+            case KC_L: return M_LK;
+            case KC_M: return M_MENT;
+            case KC_C: return M_ON;
             case TAB_NX: return TAB_PR;
             case TAB_PR: return TAB_NX;
             case HOME_I:
@@ -189,6 +194,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 
             case M_OU:
                 SEND_STRING(/*y*/"ou");
+                return false;
+
+            case M_LK:
+                SEND_STRING(/*l*/"k");
+                return false;
+
+            case M_MENT:
+                SEND_STRING(/*m*/"ent");
+                return false;
+
+            case M_ON:
+                SEND_STRING(/*c*/"on");
                 return false;
         }
     }

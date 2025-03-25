@@ -26,6 +26,9 @@ enum custom_keycodes {
     GAMING,
     M_ION,
     M_OU,
+    M_LK,
+    M_MENT,
+    M_ON,
 };
 
 
