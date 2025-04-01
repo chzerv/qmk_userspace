@@ -100,8 +100,9 @@ bool remember_last_key_user(uint16_t keycode, keyrecord_t* record,
 uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
     if ((mods & MOD_MASK_CTRL)) {
         switch (keycode) {
-            case HOME_A: return C(KC_C);  // Ctrl+A -> Ctrl+C
-            case KC_C: return C(KC_V);    // Ctrl+C -> Ctrl+V
+            case HOME_A: return C(KC_E); // Ctrl+A -> Ctrl+E (shell navigation)
+            case KC_E: return C(KC_A);   // Ctrl+E -> Ctrl+A (shell navigation)
+            case KC_C: return C(KC_V);   // Ctrl+C -> Ctrl+V
         }
     } else if ((mods & ~MOD_MASK_SHIFT) == 0) {
         switch (keycode) {
