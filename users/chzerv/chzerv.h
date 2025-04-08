@@ -46,7 +46,7 @@ enum custom_keycodes {
 #define TAB_NAV LT(_NAV, KC_TAB) // 'Tab' when tapped, 'MO(_NAV)' when held
 #define ENT_NUM LT(_NUM, KC_ENT) // 'Enter' when tapped, 'MO(_NUM)' when held
 #define BSP_CTL LCTL_T(KC_BSPC)  // 'Backspace' when tapped, 'Control' when held
-#define LT_REP LT(_SYM, KC_0)  // 'Backspace' when tapped, 'Control' when held
+#define LT_REP LT(_SYM, KC_0)    // 'QK_REP' when tapped, 'MO(_SYM)' when held
 
 #define REDO C(S(KC_Z))
 
