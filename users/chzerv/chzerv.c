@@ -23,7 +23,7 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case TAB_NAV:
         case ENT_NUM:
-        case LT_REP:
+        case LT_AREP:
             return true;
         default:
             return false;
@@ -34,7 +34,7 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case TAB_NAV:
         case ENT_NUM:
-        case LT_REP:
+        case LT_AREP:
             return false;
         default:
             return true;
@@ -91,7 +91,7 @@ bool caps_word_press_user(uint16_t keycode) {
  **/
 bool remember_last_key_user(uint16_t keycode, keyrecord_t* record,
         uint8_t* remembered_mods) {
-    if (keycode == LT_REP) { return false; }
+    if (keycode == LT_AREP) { return false; }
     return true;
 }
 
@@ -149,11 +149,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
             keycode, record
             );
 
-    // Dual function repeat key.
+    // Dual function alt-repeat key.
     switch (keycode) {
-        case LT_REP:
+        case LT_AREP:
             if (record->tap.count) {
-                repeat_key_invoke(&record->event);
+                alt_repeat_key_invoke(&record->event);
                 return false;
             }
             break;

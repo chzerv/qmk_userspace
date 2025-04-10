@@ -15,7 +15,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_HOME,          SW_LANG, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    OSM_LS,  TAB_NAV, KC_SPC,                    ENT_NUM, LT_REP,  QK_AREP
+                                    OSM_LS,  TAB_NAV, KC_SPC,                    ENT_NUM, LT_AREP,  QK_REP
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
@@ -27,9 +27,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      KC_BSPC, HOME_A,  HOME_R,  KC_S,    HOME_T,  KC_G,                               KC_M,    HOME_N,  KC_E,    HOME_I,  HOME_O,  KC_QUOT,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    KC_HOME,          SW_LANG, KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+     CW_TOGG, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    XXXXXXX,          XXXXXXX, KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    OSM_LS,  TAB_NAV, KC_SPC,                    ENT_NUM, LT_REP,  QK_AREP
+                                    OSM_LS,  TAB_NAV, KC_SPC,                    ENT_NUM, LT_AREP,  QK_REP
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   ),
 
@@ -99,7 +99,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      KC_B,    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_HOME,          SW_LANG, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, COLEMAK,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
-                                    KC_LSFT, KC_LCTL, KC_SPC,                    KC_ENT,  LT_REP,  QK_AREP
+                                    KC_LSFT, KC_LCTL, KC_SPC,                    KC_ENT,  LT_AREP,  QK_AREP
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
   )
 };
