@@ -8,6 +8,9 @@ BLUETOOTH_ENABLE = no
 # Compile with `flto` for smaller firmware size
 LTO_ENABLE = yes
 
+# DEBOUNCE_TYPE = sym_eager_pk
+DEBOUNCE_TYPE = asym_eager_defer_pk
+
 # QMK features
 CAPS_WORD_ENABLE = yes
 COMBO_ENABLE = yes
