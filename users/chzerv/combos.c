@@ -6,6 +6,7 @@ enum combos {
     COLN_COMBO,
     BG_FG_COMBO,
     Q_COMBO,
+    TAB_COMBO,
 };
 
 
@@ -16,6 +17,7 @@ const uint16_t PROGMEM quot_combo[] = {KC_E, HOME_I, COMBO_END};
 const uint16_t PROGMEM coln_combo[] = {KC_U, KC_Y, COMBO_END};
 const uint16_t PROGMEM fg_combo[] = {HOME_T, KC_G, COMBO_END};
 const uint16_t PROGMEM q_combo[] = {KC_W, KC_F, COMBO_END};
+const uint16_t PROGMEM tab_combo[] = {KC_C, KC_D, COMBO_END};
 
 combo_t key_combos[] = {
     [ESC_COMBO] = COMBO(esc_combo, KC_ESC),
@@ -25,6 +27,7 @@ combo_t key_combos[] = {
     [COLN_COMBO] = COMBO(coln_combo, KC_COLN),
     [BG_FG_COMBO] = COMBO(fg_combo, C(KC_Z)),
     [Q_COMBO] = COMBO(q_combo, KC_Q),
+    [TAB_COMBO] = COMBO(tab_combo, KC_TAB),
 };
 
 /** Repress-able combos
