@@ -8,6 +8,7 @@
 #define QUICK_TAP_TERM_PER_KEY
 
 #define CHORDAL_HOLD
+#define FLOW_TAP_TERM 150
 
 // Leader Key
 #ifdef LEADER_ENABLE
