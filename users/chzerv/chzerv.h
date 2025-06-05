@@ -9,7 +9,6 @@ enum custom_layers {
     _SYM,
     _NUM,
     _FUN,
-    _GAMING,
 };
 /**
  * Custom keys
@@ -23,7 +22,6 @@ enum custom_keycodes {
     SW_LANG,
     QWERTY,
     COLEMAK,
-    GAMING,
     M_ION,
     M_OU,
     M_LK,
