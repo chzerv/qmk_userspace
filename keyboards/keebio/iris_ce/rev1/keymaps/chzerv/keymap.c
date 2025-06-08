@@ -69,7 +69,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┤                          ├────────┼────────┼────────┼────────┼────────┼────────┤
      XXXXXXX, XXXXXXX, OSM_A,   OSM_S,   OSM_C,   UG_SATU,                            UG_NEXT, KC_VOLD, KC_MUTE, KC_VOLU, XXXXXXX, EE_CLR,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐        ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_SYRQ, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, UG_VALU, XXXXXXX,          QK_LLCK, XXXXXXX, KC_BRID, XXXXXXX, KC_BRIU, XXXXXXX, QK_BOOT,
+     KC_SYRQ, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, UG_VALU, LUMINO,           QK_LLCK, XXXXXXX, KC_BRID, XXXXXXX, KC_BRIU, XXXXXXX, QK_BOOT,
   //└────────┴────────┴────────┴───┬────┴───┬────┴───┬────┴───┬────┘        └───┬────┴───┬────┴───┬────┴───┬────┴────────┴────────┴────────┘
                                     XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX
                                 // └────────┴────────┴────────┘                 └────────┴────────┴────────┘
